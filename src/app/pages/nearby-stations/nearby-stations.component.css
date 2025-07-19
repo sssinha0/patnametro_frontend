@@ -1,0 +1,14 @@
+.nearby-container {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .stations-list {
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+  
+  .secondary {
+    font-size: 0.85rem;
+    color: gray;
+  }

@@ -1,0 +1,28 @@
+<div class="feedback-container">
+    <mat-card>
+      <mat-card-title>Submit Feedback</mat-card-title>
+      <mat-card-content>
+        <form #feedbackForm="ngForm" (ngSubmit)="submitFeedback()">
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Your name" name="name" [(ngModel)]="feedback.name" required />
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Your email" name="email" [(ngModel)]="feedback.email" required />
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>Feedback</mat-label>
+            <textarea matInput rows="5" placeholder="Write your feedback..." name="message" [(ngModel)]="feedback.message" required></textarea>
+          </mat-form-field>
+  
+          <button mat-raised-button color="primary" type="submit" [disabled]="!feedbackForm.form.valid">
+            Submit
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

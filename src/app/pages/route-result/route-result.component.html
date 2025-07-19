@@ -1,0 +1,67 @@
+<div class="space-y-8 mt-1 w-full">
+  <div *ngFor="let route of routeResults; let i = index"
+    class="rounded-xl shadow-lg border border-blue-100 bg-white/90 max-w-xl mx-auto mb-2">
+    <div
+      class="flex flex-row items-center px-4 py-3 rounded-t-xl shadow-sm bg-gradient-to-l from-indigo-50 to-blue-100">
+      <span class="material-symbols-outlined text-primary text-2xl mr-2">directions_transit_filled</span>
+      <h2 class="text-lg font-bold tracking-wide mr-auto text-gray-800">{{'OPTION' | translate}} {{ i + 1 }}</h2>
+      <div class="ml-2 flex flex-col items-end text-blue-700 font-semibold">
+        <span class="text-base">₹{{ route.fare }}</span>
+        <span class="text-xs font-medium text-blue-500"> {{ route.time }} {{'MINUTE' | translate}}</span>
+      </div>
+    </div>
+
+    <div class="divide-y divide-blue-50 px-4 py-2 sm:px-8">
+      <div *ngFor="let segment of route.stationDetails; let sIdx = index" class="py-4">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="material-symbols-outlined text-xl" [ngStyle]="{ color: segment.color }">subway</span>
+          <span class="font-semibold text-gray-900 tracking-wide">{{ segment.line }} {{'LINE' | translate}}</span>
+          <span class="ml-auto text-xs px-2 py-1 rounded-lg font-semibold"
+            [ngStyle]="{ background: segment.color, color: '#fff' }">
+            {{'TOWARDS' | translate}} {{ segment.towards | translate}}
+          </span>
+        </div>
+        <div class="flex flex-col gap-0 relative pl-7">
+          <!-- Colored Line background with connection dots -->
+          <div [style.background]="segment.color" [style.opacity]="0.18"
+            class="absolute left-4 top-7 bottom-7 w-1 rounded-full"></div>
+          <ng-container *ngFor="let station of segment.stationList; let idx = index;">
+            <div class="flex items-center mb-0.5 relative z-10">
+              <div
+                class="w-7 h-7 rounded-full bg-white border-4 text-center flex items-center justify-center font-extrabold shadow-md"
+                [ngStyle]="{
+                    borderColor: segment.color,
+                    color: segment.color,
+                    boxShadow: idx === 0 || idx === segment.stationList.length - 1 ? '0 2px 8px 0 ' + segment.color : 'none'
+                  }">
+                <span *ngIf="idx === 0">
+                  <span *ngIf="sIdx === 0" class="material-symbols-outlined text-lg">trip_origin</span>
+                  <span *ngIf="sIdx > 0" class="material-symbols-outlined text-lg text-yellow-500">sync_alt</span>
+                </span>
+                <span *ngIf="idx > 0 && idx < segment.stationList.length - 1">
+                  <span class="material-symbols-outlined text-xs">fiber_manual_record</span>
+                </span>
+                <span *ngIf="idx === segment.stationList.length - 1">
+                  <span class="material-symbols-outlined text-lg text-green-600">flag</span>
+                </span>
+              </div>
+              <div class="ml-3 flex items-center text-base font-medium text-gray-800">
+                {{ station |translate}}
+                <!-- Boarding info -->
+                <span *ngIf="idx === 0"
+                  class="ml-2 px-2 py-0.5 rounded bg-blue-100 border border-blue-200 text-blue-800 text-xs font-semibold">
+                  {{'PLATFORM' | translate}} {{ segment.boardingPlatform }}
+                </span>
+                <!-- Interchange -->
+                <span *ngIf="idx === 0 && sIdx > 0"
+                  class="ml-2 px-1.5 py-0.5 rounded bg-yellow-100 border border-yellow-200 text-yellow-800 text-xs font-semibold">
+                  {{'INTERCHANGE' | translate}}
+                </span>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

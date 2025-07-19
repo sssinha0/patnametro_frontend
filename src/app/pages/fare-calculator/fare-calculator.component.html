@@ -1,0 +1,71 @@
+<div class="min-h-screen items-center justify-center bg-gradient-to-br from-sky-50 via-white to-fuchsia-50 px-4 py-10">
+  <!-- Header -->
+  <div class="w-full flex items-center justify-between px-4 py-4 bg-white/60 shadow-sm">
+    <button mat-icon-button routerLink="''" aria-label="Back" class="text-blue-600">
+      <span class="material-symbols-outlined text-2xl">arrow_back</span>
+    </button>
+    <h1 class="font-extrabold text-slate-900 text-lg tracking-wider">{{'TITLE'| translate}}</h1>
+    <div style="width:24px"></div>
+  </div>
+  <div class="w-full  max-w-lg bg-white rounded-2xl shadow-xl mx-auto px-6 py-8 border border-slate-100">
+    <!-- Title -->
+    <div class="flex items-center mb-6 text-slate-800">
+      <span class="material-symbols-outlined text-blue-600 text-3xl mr-2">currency_rupee</span>
+      <h2 class="text-2xl font-extrabold tracking-tight">{{'FARE' | translate}}</h2>
+    </div>
+
+    <!-- Form -->
+    <form class="flex flex-col gap-4">
+      <!-- Start Station -->
+      <mat-form-field appearance="outline" class="w-full bg-white">
+        <mat-label>{{'STARTSTATION' | translate}}</mat-label>
+        <mat-icon matPrefix class="text-blue-600">train</mat-icon>
+        <mat-select [(value)]="fromStation" disableOptionCentering>
+          <mat-select-trigger>
+            {{ fromStation ? (fromStation | translate) : ('SELECT_STATION' | translate) }}
+          </mat-select-trigger>
+          <mat-option disabled value="">-- {{'SELECTOPTION' | translate}} --</mat-option>
+          <mat-option *ngFor="let station of stations" [value]="station.name">
+            <div class="flex items-center gap-2">
+              <mat-icon class="text-slate-500 text-sm">location_on</mat-icon>
+              {{ station.name | translate}}
+            </div>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- End Station -->
+      <mat-form-field appearance="outline" class="w-full bg-white">
+        <mat-label>{{'ENDSTATION' | translate}}</mat-label>
+        <mat-icon matPrefix class="text-indigo-600">train</mat-icon>
+        <mat-select [(value)]="toStation" disableOptionCentering>
+          <mat-select-trigger>
+            {{ toStation ? (toStation | translate) : ('SELECT_STATION' | translate) }}
+          </mat-select-trigger>
+          <mat-option disabled value="">-- {{'SELECTOPTION' | translate}} --</mat-option>
+          <mat-option *ngFor="let station of stations" [value]="station.name">
+            <div class="flex items-center gap-2">
+              <mat-icon class="text-slate-500 text-sm">location_on</mat-icon>
+              {{ station.name | translate}}
+            </div>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- Calculate Button -->
+      <button mat-raised-button color="primary" type="button" (click)="calculateFare()"
+        class="w-full py-3 text-base font-semibold tracking-wide">
+        <span class="material-symbols-outlined align-middle mr-2">calculate</span> {{ 'CALCULATEFARE'| translate}}
+      </button>
+    </form>
+
+    <!-- Result -->
+    <div *ngIf="fareResult" class="mt-6 bg-slate-50 border border-blue-100 rounded-xl px-5 py-4 shadow-inner">
+      <h3 class="text-lg font-bold text-blue-700 mb-2">{{'TRIPSUMMARY'| translate}}</h3>
+      <div class="grid grid-cols-1 gap-2 text-sm text-slate-700">
+        <div><strong>{{ 'FARE' | translate }}</strong> ₹{{ fareResult.fare }}</div>
+        <div><strong>{{'ESTIMATEDTIME'| translate}}</strong> {{ fareResult.estimatedTime }}</div>
+        <div><strong>{{'STOPS' | translate}}</strong> {{ fareResult.stops }}</div>
+      </div>
+    </div>
+  </div>
+</div>

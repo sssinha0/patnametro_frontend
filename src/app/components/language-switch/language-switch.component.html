@@ -1,0 +1,18 @@
+<mat-form-field appearance="outline" class="modern-lang-select w-full max-w-xs">
+  <mat-label>{{'CHOOSELANGUAGE' | translate}}</mat-label>
+
+  <!-- Globe icon prefix -->
+  <button mat-icon-button disabled matPrefix>
+    <mat-icon class="text-indigo-600">public</mat-icon>
+  </button>
+
+  <!-- Select Dropdown -->
+  <mat-select [(value)]="selectedLang" (selectionChange)="switchLanguage($event.value)" disableRipple>
+    <mat-option *ngFor="let lang of languages" [value]="lang.code">
+      <span class="flex items-center gap-2 font-medium">
+        <span class="inline-block w-4 h-4 rounded-full" [ngStyle]="{ backgroundColor: lang.color || '#ddd' }"></span>
+        {{ lang.label }}
+      </span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

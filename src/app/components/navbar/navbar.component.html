@@ -1,0 +1,14 @@
+<mat-toolbar
+  color="primary"
+  class="sticky top-0 z-50 w-full flex justify-between items-center px-4 py-2 shadow-md bg-white text-slate-800 dark:bg-slate-900 dark:text-white"
+>
+  <!-- Left Section: Logo + Title -->
+  <div class="flex items-center gap-3">
+    <mat-icon class="text-red-500">tram</mat-icon>
+    <span class="text-lg sm:text-xl font-bold tracking-wide">{{ 'TITLE' | translate }}</span>
+  </div>
+  <!-- Right: Language Switch or User Menu -->
+  <div class="ml-auto flex items-center gap-3">
+    <app-language-switch></app-language-switch>
+  </div>
+</mat-toolbar>

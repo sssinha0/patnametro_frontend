@@ -1,0 +1,29 @@
+<div class="min-h-screen w-full bg-gradient-to-br from-blue-100 via-white to-pink-100 flex flex-col items-center px-0">
+  <!-- Header -->
+  <div class="w-full flex items-center justify-between px-4 py-4 bg-white/60 shadow-sm">
+    <button mat-icon-button routerLink="''" aria-label="Back" class="text-blue-600">
+      <span class="material-symbols-outlined text-2xl">arrow_back</span>
+    </button>
+    <h1 class="font-extrabold text-slate-900 text-lg tracking-wider">{{'PATNAMETROMAP'| translate}}</h1>
+    <div style="width:24px"></div>
+  </div>
+
+  <!-- Map Card -->
+  <div class="flex flex-col items-center justify-center w-full py-8">
+    <div
+      class="rounded-3xl shadow-lg overflow-hidden w-full max-w-3xl bg-white/90 transition-transform hover:scale-105">
+      <img src="assets/PatnaMetroMap.png" alt="Patna Metro Route Map"
+        class="w-full h-auto block object-contain select-none" />
+    </div>
+  </div>
+
+  <!-- Footer/Legend -->
+  <div class="flex flex-row gap-6 mb-4">
+    <div class="flex items-center gap-2 font-semibold text-sm">
+      <span class="w-6 h-2 rounded-full" style="background:#1976d2"></span> {{'BLUELINE'| translate}}
+    </div>
+    <div class="flex items-center gap-2 font-semibold text-sm">
+      <span class="w-6 h-2 rounded-full" style="background:#d32f2f"></span> {{'REDLINE' | translate}}
+    </div>
+  </div>
+</div>

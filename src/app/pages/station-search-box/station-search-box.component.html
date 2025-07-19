@@ -1,0 +1,60 @@
+<div class="p-6 bg-white rounded-3xl shadow-xl border border-slate-100 w-full max-w-3xl mx-auto">
+  <h2 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+    <mat-icon class="text-blue-600">travel_explore</mat-icon>
+    {{'PLANJOURNEY' | translate}}
+  </h2>
+
+  <!-- Station Form -->
+  <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Start Station -->
+    <mat-form-field appearance="outline" class="w-full bg-white">
+      <mat-label>{{'STARTSTATION' | translate}}</mat-label>
+      <mat-icon matPrefix class="text-blue-600">train</mat-icon>
+      <mat-select [(value)]="startStation" disableOptionCentering>
+        <!-- 🔽 Trigger shown in display box -->
+        <mat-select-trigger>
+          {{ startStation ? (startStation | translate) : ('SELECT_STATION' | translate) }}
+        </mat-select-trigger>
+        <mat-option disabled value="">-- {{'SELECTOPTION' | translate}} --</mat-option>
+        <mat-option *ngFor="let station of stations" [value]="station.name">
+          <div class="flex items-center gap-2">
+            <mat-icon class="text-slate-500 text-sm">location_on</mat-icon>
+            {{ station.name | translate}}
+          </div>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!-- End Station -->
+    <mat-form-field appearance="outline" class="w-full bg-white">
+      <mat-label>{{'ENDSTATION' | translate}}</mat-label>
+      <mat-icon matPrefix class="text-indigo-600">train</mat-icon>
+      <mat-select [(value)]="endStation" disableOptionCentering>
+        <mat-select-trigger>
+          {{ endStation ? (endStation | translate) : ('SELECT_STATION' | translate) }}
+        </mat-select-trigger>
+        <mat-option disabled value="">-- {{'SELECTOPTION' | translate}} --</mat-option>
+        <mat-option *ngFor="let station of stations" [value]="station.name">
+          <div class="flex items-center gap-2">
+            <mat-icon class="text-slate-500 text-sm">location_on</mat-icon>
+            {{ station.name | translate}}
+          </div>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <!-- Action Buttons -->
+  <div class="mt-6 flex flex-col md:flex-row gap-4 justify-end">
+    <button mat-flat-button color="primary" (click)="submitSearch()"
+      class="w-full md:w-auto px-6 py-2 text-white font-semibold rounded-lg shadow-lg">
+      <mat-icon class="mr-2">search</mat-icon>
+      {{'SEARCHROUTE' | translate}}
+    </button>
+
+    <button mat-stroked-button color="warn" (click)="reset()"
+      class="w-full md:w-auto px-6 py-2 font-semibold rounded-lg">
+      <mat-icon class="mr-2">refresh</mat-icon>
+      {{'RESET'| translate}}
+    </button>
+  </div>
+</div>
