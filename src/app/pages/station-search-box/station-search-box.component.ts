@@ -38,7 +38,11 @@ export class StationSearchBoxComponent {
       this.search.emit(searchStation);
     }
   }
-
+  swapStations(){
+    let tempStation:string= this.startStation;
+    this.startStation = this.endStation
+    this.endStation = tempStation;
+  }
   reset() {
     this.search.emit({startStation:'',endStation:''});
   }
